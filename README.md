@@ -36,7 +36,7 @@
  - 톡방에서 자유 질의 응답 해주세요
  - 다 푼 후 github을 통해 서로 code review를 통한 발전
  - 코드 리뷰는 'github' 에 댓글로 올려주세요
-   (https://github.com/YounghoonKwon/breaking-code-bang/)
+   (https://github.com/YounghoonKwon/code-rhino)
  - 'github' 올리는 방법 : 해당 문제 directory 들어가셔서 제목은 성함으로 올려주세요
  - 불가피한 사정은 톡방에 통보 바람. 스터디분들 의견에 따라 벌금 논의 진행.
  - 실력차이는 천차만별입니다! 너무 부담갖지 마시고, 서로 도움되는 역할 합시다.
