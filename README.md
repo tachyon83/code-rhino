@@ -1,4 +1,4 @@
-# breaking-code-bang
+# CODING RHINO (코뿔소) ->> 코드뿌시기!!
 ## group study repository consisting of 10 people, focus on solving problem every day
 
 ### 알고리즘 온라인 스터디 운영 계획
