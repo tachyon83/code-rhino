@@ -10,30 +10,25 @@ int arr[1001][1001] = { 0, };
 
 void DFS(int N,int M,int v) {
 	stack <int> st;
-	vector<int> vec;
+	int count = 0;
 	int visited[1001] = { 0, };
 	st.push(v);
-	while (st.top()) {
+	
+	while (!st.empty()) {
 		int x = st.top();
-		if (visited[x] == 0) {
-			visited[x] = 1;
-			vec.push_back(x);
-		}
-		else {
-			st.pop();
+		st.pop();
+		if (visited[x]) {
 			continue;
 		}
-		if (vec.size() == N || vec.size()>M) {
-			for (int i = 0; i < vec.size(); i++) {
-				printf("%d ",vec[i]);
-			}
-			return;
-		}
-		st.pop();
-		for (int i = N; i > 0; i--) {
+		visited[x] = 1;
+		for (int i = N; i >0; i--) {
 			if (!visited[i]&&(arr[x][i])) {
 				st.push(i);
 			}
+		}
+		printf("%d ", x);
+		if (++count == N) {
+			return;
 		}
 	}
 
@@ -41,38 +36,28 @@ void DFS(int N,int M,int v) {
 
 void BFS(int N, int M, int v) {
 	queue <int> q;
-	vector<int> vec;
+	int count = 0;
 	int visited[1001] = { 0, };
 	q.push(v);
-
+	visited[v] = 1;
 	while (!q.empty()) {
 		int x = q.front();
-		if (visited[x] == 0) {
-			visited[x] = 1;
-			vec.push_back(x);
-		}
-		else {
-			q.pop();
-			continue;
-		}
-
-		if (vec.size() == N || vec.size() > M) {
-			for (int i = 0; i < vec.size(); i++) {
-				printf("%d ", vec[i]);
-			}
-			return;
-		}
 		q.pop();
 		for (int i = 1; i <= N;i++) {
 			if ((!visited[i])&&(arr[x][i])) {
 				q.push(i);
+				visited[i] = 1;
 			}
+		}
+		printf("%d ", x);
+		if (++count == N) {
+			return;
 		}
 	}
 
 }
 int main() {
-	//dfs´Â ½ºÅÃÀ¸·Î bfs´Â Å¥·Î ±¸ÇöÇØº¸ÀÚ!
+	//dfsëŠ” ìŠ¤íƒìœ¼ë¡œ bfsëŠ” íë¡œ êµ¬í˜„í•´ë³´ìž!
 	int N, M, first;
 	int x, y;
 	stack <int> st;
