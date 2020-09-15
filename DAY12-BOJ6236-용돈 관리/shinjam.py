@@ -1,20 +1,17 @@
 N, M = map(int, input().split())
-K = [int(input()) for _ in range(N)]
+costs = [int(input()) for _ in range(N)]
 
-left,right = 0,100_000
-while left < right:
-    mid = (left + right) // 2
-    print(mid)
-    tmp, cnt = 0, 1
-    for d in K:
-        tmp += d
-        if tmp >= mid:
+low, high = max(costs), sum(costs)
+while low < high:
+    cnt, k = 0, 0
+    mid = (low + high) // 2
+    for cost in costs:
+        if k < cost:
+            k = mid
             cnt += 1
-            tmp = d
-            
+        k -= cost
     if cnt > M:
-        left = mid + 1
+        low = mid + 1
     else:
-        right = mid - 1
-        
-print(left)
+        high = mid - 1
+print(low)
