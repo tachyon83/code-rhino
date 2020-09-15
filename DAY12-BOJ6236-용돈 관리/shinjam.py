@@ -16,4 +16,5 @@ while left < right:
         left = mid + 1
     else:
         right = mid - 1
+        
 print(left)
