@@ -20,6 +20,14 @@ int main() {
 		mid = (start + end) / 2;
 		int count = countday(mid, use, N);
 		if (count == M) {
+			while (1) {
+				mid--;
+				count=countday(mid, use, N);
+				if (count != M) {
+					mid++;
+					break;
+				}
+			}
 			break;
 		}
 		else if (count > M){
