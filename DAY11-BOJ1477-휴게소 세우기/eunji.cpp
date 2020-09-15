@@ -18,11 +18,17 @@ int main() {
 	for (int i = 0; i < curNum; i++) {
 		cin >> x;
 		cur.push_back(x);
-		max = x > max ? x : max;
+	}
+	cur.push_back(0);
+	cur.push_back(total);
+	sort(cur.begin(), cur.end());
+
+	for (int i = 0; i < cur.size()-1; i++) {
+		int d = cur[i + 1] - cur[i];
+		max = d > max ? d : max;
 	}
 	int start = total / (curNum + addNum);
 	int end = max;
-	sort(cur.begin(), cur.end());
 
 	while (start<=end) {
 		mid = (start + end) / 2;
@@ -46,7 +52,7 @@ int main() {
 
 int count(int dis) {
 	int sum = 0;
-	for (int i = 0; i < curNum-1; i++) {
+	for (int i = 0; i < cur.size()-1; i++) {
 		int d = cur[i + 1] - cur[i];
 		if (d > dis) {
 			sum += d / dis;
