@@ -3,9 +3,8 @@ from itertools import combinations
 from copy import deepcopy
 
 
-def bfs(x, y):
-    global tmp_lab
-    queue = deque([(x, y)])
+def bfs(tmp_lab, virus):
+    queue = deque(virus)
     dx, dy = (1, 0, -1, 0), (0, 1, 0, -1)
     ret = 0
     while queue:
@@ -35,19 +34,21 @@ for n in range(N):
         if val == 0:
             zero += 1
 
+# 벽 세우는 케이스
+# 바이러스 퍼트리기
 ret = float('inf')
 for w1, w2, w3 in combinations(range(N * M), 3):
-    tmp_lab = deepcopy(lab)
     wy1, wx1 = divmod(w1, M)
     wy2, wx2 = divmod(w2, M)
     wy3, wx3 = divmod(w3, M)
     cnt = 0
+    tmp_lab = deepcopy(lab)
     if not any([lab[wy1][wx1], lab[wy2][wx2], lab[wy3][wx3]]):
         tmp_lab[wy1][wx1] = 1
         tmp_lab[wy2][wx2] = 1
         tmp_lab[wy3][wx3] = 1
-        for v in virus:
-            cnt += bfs(*v)
+
+        cnt += bfs(tmp_lab, virus)
         if cnt < ret:
             ret = cnt
 
