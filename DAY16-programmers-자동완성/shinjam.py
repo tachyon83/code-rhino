@@ -1,16 +1,33 @@
 from collections import defaultdict
+import sys 
+sys.setrecursionlimit(10**8)
 
+class Node:
+    def __init__(self, cnt = 0):
+        self.cnt = cnt
+        self.children = defaultdict(Node)
+        
+def add(root, word, idx = 0):
+    if idx == len(word): 
+        return
+    root.children[word[idx]].cnt += 1
+    add(root.children[word[idx]], word, idx + 1)
+
+def check(root, word, idx = 0):
+    if idx == len(word): 
+        return idx
+    if root.children[word[idx]].cnt == 1 :
+        return idx + 1
+    return check(root.children[word[idx]], word, idx + 1)
+
+
+        
 def solution(words):
-    hash_dict = defaultdict(int)
+    root = Node()
+    ret = 0
     for word in words:
-        for i in range(len(word)):            
-            hash_dict[word[:i + 1]] += 1
-    
-    
-    cnt = 0
+        add(root, word)
     for word in words:
-        for i in range(len(word)):  
-            cnt += 1
-            if hash_dict[word[:i + 1]] == 1:
-                break
-    return cnt
+        ret += check(root, word)
+    
+    return ret
