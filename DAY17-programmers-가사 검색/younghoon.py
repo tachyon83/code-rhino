@@ -8,7 +8,10 @@ def solution(words, queries):
         trie_by_length[len(word)].add(word)
         r_trie_by_length[len(word)].add(word[::-1])
     for query in queries:
-        if query[0] != "?":
+        if query[0] =="?" and query[len(query)-1] =="?":
+            print
+            result.append(trie_by_length[len(query)].size)
+        elif query[0] != "?":
             result.append(trie_by_length[len(query)].search(query))
         else:
             query = query[::-1]
@@ -19,6 +22,7 @@ def solution(words, queries):
 class Trie():
     def __init__(self):
         self.head = dict()
+        self.size = 0
     #트라이에 추가시킴, value의 0번째에 sub-tree?의 갯수를 업데이트 시킴. 1번째는 traversing을 위한 다음 노드
     def add(self, word):
         curr = self.head
@@ -26,6 +30,7 @@ class Trie():
             curr.setdefault(ch,[0,{}])
             curr[ch][0] +=1
             curr = curr[ch][1]
+        self.size+=1
 
     def search(self, word):
         curr = self.head
@@ -38,5 +43,3 @@ class Trie():
                 curr = curr[word[i]][1]
             else:
                 return 0
-            
-            
