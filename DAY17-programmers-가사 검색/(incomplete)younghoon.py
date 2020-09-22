@@ -25,11 +25,10 @@ class Trie():
     
     def search(self, word):
         curr = self.head
-        word = word.replace("?", '')
-        for ch in word:
-            # if ch in curr.keys():
-            #     curr = curr[ch][1]
-            # else:
-#                 imcomplete
-        return 0
-
+        for i in range(len(word)):
+            if word[i] in curr.keys():
+                if word[i+1] == '?':
+                    return curr[word[i]][0]
+                curr = curr[word[i]][1]
+            else:
+                return 0
