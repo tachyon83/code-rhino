@@ -1,8 +1,11 @@
-//틀렸다고 뜹니다..수정중!
+//틀렷어요....ㅠㅠㅠㅠ
+//반례를 모르겠어요.....
+
 #include <iostream>
 #include <algorithm>
 #include <memory.h>
 #define MIN(a,b)(a<=b?a:b)
+#define MAX 9999999999;
 
 using namespace std;
 int dp[16][65536];
@@ -18,8 +21,8 @@ int TSP(int now, int set);
 //dp를 이용하여 DFS로 풀었을때의 중복 연산 시간을 줄인다.
 
 //dp[현재위치][지금까지 지나온점(집합을 비트로 표현)] -> 이상태에서 남은 경로를 최소로 돌때의 값을 나타냄
-//0011-> 1번,2번 지난거
-//0101-> 1번,3번 지난거
+//0011-> 0번,1번 지난거
+//0101-> 0번,2번 지난거
 
 //도시가 최대 16개라면 1111111111111111 -> 2^16 -> 65535(10진수) -> unsigned short로 표현가능 -> 그냥 편하게 int씀!
 
@@ -45,6 +48,9 @@ int TSP(int now, int set) {
 
 	//이미 다 방문을 한 상태면(set이 111111....11), 시작지점(0번)으로 돌아가는 값만 남음
 	if (set == ((1 << N) - 1)) {
+		if (city[now][0]==0) {
+			return MAX;
+		}
 		return city[now][0];
 	}
 	//이미 찾아놓은 값이면 계산할 필요없음
@@ -54,7 +60,7 @@ int TSP(int now, int set) {
 
 	//아직 모르는 값이면..,
 	else {
-		int min = 9999999;
+		int min = MAX;
 
 		for (int next = 0; next < N; next++) {
 
