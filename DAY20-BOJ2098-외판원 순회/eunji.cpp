@@ -1,6 +1,4 @@
-//틀렷어요....ㅠㅠㅠㅠ
-//반례를 모르겠어요.....
-
+//수정완료!
 #include <iostream>
 #include <algorithm>
 #include <memory.h>
@@ -65,7 +63,7 @@ int TSP(int now, int set) {
 		for (int next = 0; next < N; next++) {
 
 			//next는 이미갔던곳(set)에 없는 값이어야함
-			if (set&(1 << next)) {
+			if ((set&(1 << next)) || city[now][next]==0) {
 				continue;
 			}
 			else {
