@@ -1,3 +1,4 @@
+..왜실패??
 bool check[9] = { false, };
 	for (int i = 0; i < 9; i++) {
 		memset(check, false, sizeof(check));
