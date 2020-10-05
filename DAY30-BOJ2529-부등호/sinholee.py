@@ -60,3 +60,4 @@ def perm(depth, visited, target, length, res, arr, is_max, callback):
 print(perm(0, [0] * (k+1), get_max_nums(k), k+1, "", arr, True, is_correct))
 print(perm(0, [0] * (k+1), get_min_nums(k, BIGNUM), k+1, "", arr, False, is_correct))
 
+
