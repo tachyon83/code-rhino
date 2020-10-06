@@ -18,7 +18,7 @@ def get_min_nums(k, constant):
 
 def get_max_nums(k):
     s = ""
-    for i in range(9, 9-k-1, -1):
+    for i in range(k+1):
         s += BIGNUM[i]
     return s
 
@@ -38,26 +38,26 @@ def get_max_nums(k):
     전체적으로 변수명도 피드백 주실 부분 있으면 달게 받겠습니당.
 
     '''
-def perm(depth, visited, target, length, res, arr, is_max, callback):  
-    if depth == length:
+def perm(depth, visited, target, num_length, res, symbols_arr, is_max, callback):  
+    if depth == num_length:
         return res
     min_value = BIGNUM
     max_value = SMALLNUM
-    for i in range(length):
+    for i in range(num_length):
         if visited[i]:
             continue
-        if depth == 0 or callback(res[-1], target[i], arr[depth-1]):
-            visited[i] = 1
-            temp = perm(depth+1, visited, target, length, res+target[i], arr, is_max, callback)
-            if is_max:
-                max_value = max(temp, max_value)
-            else:
-                min_value = min(temp, min_value)
-            visited[i] = 0
+        if depth and not callback(res[-1], target[i], symbols_arr[depth-1]):
+            continue
+        visited[i] = 1
+        temp = perm(depth+1, visited, target, num_length, res+target[i], symbols_arr, is_max, callback)
+        if is_max:
+            max_value = max(temp, max_value)
+        else:
+            min_value = min(temp, min_value)
+        visited[i] = 0
     return max_value if is_max else min_value
 
 
 print(perm(0, [0] * (k+1), get_max_nums(k), k+1, "", arr, True, is_correct))
 print(perm(0, [0] * (k+1), get_min_nums(k, BIGNUM), k+1, "", arr, False, is_correct))
-
 
