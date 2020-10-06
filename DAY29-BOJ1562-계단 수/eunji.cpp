@@ -11,6 +11,7 @@ using namespace std;
 //숫자표시를 0부터 해야되니까 000..001  이 숫자0을 나타내고 000..010  이 숫자 1을 나타냄 (헷깔림 주의)
 //참고하기 좋은 사이트!
 //https://m.blog.naver.com/PostView.nhn?blogId=occidere&logNo=221130521559&proxyReferer=https:%2F%2Fwww.google.com%2F
+
 int main() {
 	int N;
 	cin >> N;
