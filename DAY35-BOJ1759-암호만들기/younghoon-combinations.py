@@ -1,7 +1,4 @@
-'''
-이것도 틀렸다고 나와요
-오늘 왜이러죠....
-'''
+
 
 import sys
 from itertools import combinations
