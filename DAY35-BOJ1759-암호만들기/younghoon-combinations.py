@@ -6,8 +6,8 @@
 import sys
 from itertools import combinations
 #sys.stdin = open("input.txt", "r")
-L, C = map(int, sys.stdin.readline().split(' '))
-chars = list(sys.stdin.readline().split(' '))
+L, C = map(int, sys.stdin.readline().split())
+chars = list(sys.stdin.readline().split())
 chars.sort()
 
 all_outputs = list(combinations(chars,L))
