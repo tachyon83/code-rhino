@@ -1,12 +1,11 @@
 '''
 출력초과가 뜨는데 이유는 모르겟심다...
-
 '''
 
 import sys
 #sys.stdin = open("input.txt", "r")
-L, C = map(int, sys.stdin.readline().split(' '))
-chars = list(sys.stdin.readline().split(' '))
+L, C = map(int, sys.stdin.readline().split())
+chars = list(sys.stdin.readline().split())
 chars.sort()
 
 def crypto(chars, curr,curr_index):
