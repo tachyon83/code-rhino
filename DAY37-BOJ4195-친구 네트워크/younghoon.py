@@ -5,7 +5,9 @@ def getParent(parent : list, x : str):
     if parent[x] == x:
         return x
     else:
-        return getParent(parent, parent[x])
+        p = getParent(parent, parent[x])
+        parent[x] = p
+        return p
 
 def unionParent(parent: list, a : str, b : str):
     a = getParent(parent, a)
