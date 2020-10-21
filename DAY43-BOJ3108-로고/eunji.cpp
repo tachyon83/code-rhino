@@ -11,6 +11,13 @@ vector<rec> v;
 vector<int>parent;
 void join(int i, int j);
 
+
+int findparent(int i) {
+	if (parent[i] == i)return i;
+	else {
+		return findparent(parent[i]);
+	}
+}
 int main() {
 	rec tmp;
 	int num;
@@ -56,11 +63,13 @@ void join(int i,int j) {
 	}
 	if (join == true) {
 		//parent가 같으면 조인이 필요없다.
-		if (parent[i] < parent[j]) {
-			parent[j] = parent[i];
+		int f1 = findparent(i);
+		int f2 = findparent(j);
+		if (f1 < f2) {
+			parent[j] = f1;
 		}
-		else if (parent[i] > parent[j]) {
-			parent[i] = parent[j];
+		else if (f2 > f1) {
+			parent[i] = f2;
 		}
 	}
 
