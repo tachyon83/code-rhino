@@ -29,9 +29,9 @@ def solve(nums):
 dx, dy = (0, 1, 0, -1, 0), (0, 0, 1, 0, -1)
 
 cands = combinations(range(N**2), 3)
-MAX = float('inf')
+ans = float('inf')
 for cand in cands:
     ret = solve(cand)
-    if ret < MAX:
-        MAX = ret
-print(MAX)
+    if ret < ans:
+        ans = ret
+print(ans)
