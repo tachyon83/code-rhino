@@ -1,5 +1,6 @@
 '''
 저도 반례못찾겠네요ㅠ
+찾음!
 '''
 def draw(square, mat):
     x1, y1, x2, y2 = square
@@ -7,16 +8,21 @@ def draw(square, mat):
     y1 += 1000 + y1
     x2 += 1000 + x2
     y2 += 1000 + y2
-    added_cnt = -4
-    for x in  range(x1, x2+2):
-        mat[y1][x] = 1
-        mat[y2][x] = 1
-        added_cnt +=2
-
-    for y in  range(y1, y2+2):
-        mat[y][x1] = 1
-        mat[y][x2] = 1
-        added_cnt+=2
+    added_cnt = 0
+    for x in  range(x1, x2+1):
+        if not mat[y1][x]:
+            mat[y1][x] = 1
+            added_cnt +=1
+        if not mat[y2][x]:
+            mat[y2][x] = 1
+            added_cnt +=1
+    for y in  range(y1, y2+1):
+        if not mat[y][x1]:
+            mat[y][x1] = 1
+            added_cnt +=1
+        if not mat[y][x2]:
+            mat[y][x2] = 1
+            added_cnt +=1
     return mat, added_cnt
 
 def bfs(y, x, mat, visited):
