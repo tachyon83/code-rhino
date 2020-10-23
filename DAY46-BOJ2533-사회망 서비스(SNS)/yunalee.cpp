@@ -30,7 +30,7 @@ void DFS(int n) {
 
 
 int solution(int n, bool chk) {
-    int result = chkArr[n][chk];
+    int& result = chkArr[n][chk];
 
     if (result != -1) {
         return result;
