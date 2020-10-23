@@ -1,3 +1,4 @@
+//트리가 많이 어려워서 참고해서 푼거라 다음에 다시 풀어보겠습니다
 #include <iostream>
 #include <vector>
 #include <algorithm>
