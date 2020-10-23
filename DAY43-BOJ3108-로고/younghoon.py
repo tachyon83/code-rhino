@@ -1,5 +1,6 @@
 import sys
 #sys.stdin = open("input.txt", "r")
+sys.setrecursionlimit(100000)
 N = int(sys.stdin.readline())
 grid = [[0] * 2001 for _ in range(2001)]
 
@@ -17,19 +18,20 @@ for _ in range(N):
         grid[i][y2] = 1
 
 def dfs(x,y):
-    if 0<=x<2001 and 0<=y<2001 and grid[x][y] == 1:
-        grid[x][y] = 2
-        for i in range(4):
-            nx = x + dx[i]
-            ny = y + dy[i]
+    for i in range(4):
+        nx = x + dx[i]
+        ny = y + dy[i]
+        if 0 <= nx < 2001 and 0 <= ny < 2001 and grid[nx][ny] == 1:
+            grid[nx][ny] = 2
             dfs(nx,ny)
-    else:
-        return
+        else:
+            continue
 
 count = 0
 for i in range(2001):
     for j in range(2001):
         if grid[i][j] == 1:
+            grid[i][j] = 2
             dfs(i,j)
             count += 1
 
