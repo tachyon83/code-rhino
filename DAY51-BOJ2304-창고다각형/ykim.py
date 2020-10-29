@@ -1,5 +1,4 @@
 import sys
-sys.stdin = open("input.txt", 'r')
 
 col = [0] * 1001
 N = int(input())
