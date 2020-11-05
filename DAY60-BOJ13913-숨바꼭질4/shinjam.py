@@ -1,8 +1,6 @@
 from collections import deque
 import sys
 
-MAX = 100_000
-
 N, K = map(int, input().split())
 
 if N >= K:
@@ -10,19 +8,21 @@ if N >= K:
     print(*range(N, K-1, -1))
     sys.exit(0)
 
-parent = [p for p in range(MAX+1)]
+parent = [0] * 100_001
+costs = [0] * 100_001
 
-queue = deque([[N, 0]])
+queue = deque([N])
 while queue:
-    cur, cost = queue.popleft()
+    cur = queue.popleft()
     if cur == K:
         break 
     for nxt in [cur-1, cur+1, cur*2]:
-        if 0<=nxt<=MAX and parent[nxt]==nxt:
+        if 0<=nxt<=100_000 and not costs[nxt]:
             parent[nxt] = cur
-            queue.append([nxt, cost+1])
+            costs[nxt] = costs[cur] + 1
+            queue.append(nxt)
 
-print(cost)
+print(costs[cur])
 route = []
 while K != N:
     route.append(K)
