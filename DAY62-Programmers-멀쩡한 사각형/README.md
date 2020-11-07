@@ -1,1 +1,1 @@
-# [programmers.co.kr/learn/courses/30/lessons/620483](https://programmers.co.kr/learn/courses/30/lessons/620483)
+# [programmers.co.kr/learn/courses/30/lessons/62048](https://programmers.co.kr/learn/courses/30/lessons/62048)
