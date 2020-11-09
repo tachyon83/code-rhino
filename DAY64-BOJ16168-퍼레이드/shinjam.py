@@ -1,19 +1,32 @@
 from collections import defaultdict
+import sys 
 
-def check(graph):
-    odd = 0
-    for val in graph.values():
-        if len(val) % 2 != 0:
-            odd += 1     
-    return True if odd in [0, 2] else False
+def find(node):
+    if parent[node] != node:
+        parent[node] = find(parent[node])
+        
+    return parent[node]
 
-    
-graph = defaultdict(list)
 
-V, E = map(int, input().split())
+V, E = map(int, sys.stdin.readline().split())
+
+adj = [0]*(V+1)
+parent = {i:i for i in range(1, V+1)}
+ret = 0
+
 for _ in range(E):
-    a, b = map(int, input().split())
-    graph[a].append(b)
-    graph[b].append(a)
-
-print('YES' if check(graph) else 'NO')
+    a, b = map(int, sys.stdin.readline().split())
+    adj[a], adj[b] = adj[a]+1, adj[b]+1
+    root_a, root_b = find(a), find(b)
+    if root_a != root_b:
+        parent[root_b] = root_a
+    
+for i in range(1, V+1):
+    if adj[i] % 2:
+        ret += 1
+        
+root = find(1)
+for i in range(2, V+1):
+    if find(i) != root:
+        ret = -1
+print('YES' if ret in [0, 2] else 'NO')
