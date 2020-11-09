@@ -18,7 +18,7 @@ def solution(n, m, dic):
         for v, cost in dic[node]:
             if not visited[v] and cost < keys[v][0]:
                 keys[v][0] = cost
-                heapq.heappush(hq, keys[v])
+                heapq.heappush(hq, tuple(keys[v]))
     res = 0
     max_value = 0
     for key in keys:
