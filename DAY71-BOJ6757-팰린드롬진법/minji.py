@@ -9,12 +9,9 @@ def sol():
             d.append(n % i)
             n //= i
 
-        k = len(d)
-        for j in range(k//2):
-            if d[j] != d[k-j-1]:
-                break
-            if j == k//2-1:
-                s.add(i)
+        if d == list(reversed(d)):
+            s.add(i)
+
         m = i
     for i in range(m, 0, -1):
         if x % i == 0:
