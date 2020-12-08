@@ -18,7 +18,7 @@ def bfs(row, col):
             nx = col + x
             # if ny < 0 or ny >= n or nx < 0 or nx >= n:
             #     continue
-            if 0 <= ny < n and 0 <= nx < n and l <= maps[row][col] - maps[ny][nx] <= r and (ny, nx) not in visit:
+            if 0 <= ny < n and 0 <= nx < n and l <= abs(maps[row][col] - maps[ny][nx]) <= r and (ny, nx) not in visit:
                 q.append((ny, nx))
                 visit.add((ny, nx))
                 check = True
