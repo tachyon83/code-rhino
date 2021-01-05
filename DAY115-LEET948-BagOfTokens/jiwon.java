@@ -1,3 +1,5 @@
+//ì•„ì§ ëª» í’ˆ
+
 class Solution {    
     public int bagOfTokensScore(int[] tokens, int P) {
         int tl = tokens.length;
@@ -13,7 +15,7 @@ class Solution {
         
         for(int i=0;i<tl;i++){
             if(s>0){
-                //(Á¦ÀÏ Å«) && (¹æ¹®ÇÏÁö ¾ÊÀº) index == k
+                //(ì œì¼ í°) && (ë°©ë¬¸í•˜ì§€ ì•Šì€) index == k
                 for(k=tl-1;k>0;k--){
                     if(check[k]==false){
                         break;
@@ -29,7 +31,7 @@ class Solution {
                 break;
             }
             
-            if(check[i]==false){    //¹æ¹®ÇÑ Àû ¾øÀ½
+            if(check[i]==false){    //ë°©ë¬¸í•œ ì  ì—†ìŒ
                 P-=tokens[i];
                 s++;
                 
