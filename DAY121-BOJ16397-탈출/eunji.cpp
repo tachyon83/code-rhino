@@ -1,4 +1,3 @@
-//반례를 못찾겠습니다..
 #include<iostream>
 #include <queue>
 #include <string>
@@ -14,7 +13,6 @@ int main() {
 
 void BFS(int N, int T, int G) {
 	queue <pair<int, int>> q;
-	int turn = 0;
 	q.push({ N,0 });
 	bool visit[100000] = { false, };
 	visit[N] = true;
@@ -27,15 +25,12 @@ void BFS(int N, int T, int G) {
 			cout << turn;
 			return;
 		}
-		if (turn > T) {
-			cout << "ANG";
-			return;
-		}
+		if (turn > T) break;
 		q.pop();
 		//버튼A
 		if (num < 99999 && visit[num + 1] == false) {
 			q.push({ num + 1,turn + 1 });
-			visit[num + 1];
+			visit[num + 1] = true;;
 		}
 		//버튼B
 		num *= 2;
