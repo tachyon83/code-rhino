@@ -1,15 +1,14 @@
-package gold4.B16397;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main {
 
-	static int T;
-	static int G;
-	static final int INF = Integer.MAX_VALUE;
-	static int answer = INF;
+//	static final int MAX = 100000;
+	static Queue<int[]> queue = new LinkedList<>();
+	static boolean[] check = new boolean[100000];
 
 	public static void main(String[] args) throws Exception {
 
@@ -17,39 +16,51 @@ public class Main {
 		StringTokenizer str = new StringTokenizer(br.readLine(), " ");
 
 		int N = Integer.parseInt(str.nextToken());
-		T = Integer.parseInt(str.nextToken());
-		G = Integer.parseInt(str.nextToken());
-		dfs(N, 0);
-		System.out.println(answer == INF ? "ANG" : answer);
+		int T = Integer.parseInt(str.nextToken());
+		int G = Integer.parseInt(str.nextToken());
+		int answer = -1;
+		queue.offer(new int[] { N, 0 });
+		while (!queue.isEmpty()) {
+			int[] p = queue.poll();
+			if (p[1] > T) {
+				break;
+			}
+			if (p[0] == G) {
+				answer = p[1];
+				break;
+			}
+			if (p[0] < 99999) {
+				Abutton(p[0], p[1]);
+			}
+			if (p[0] * 2 < 99999) {
+				Bbutton(p[0], p[1]);
+			}
+		}
+
+		System.out.println(answer == -1 ? "ANG" : answer);
+
 	}
 
-	private static void dfs(int cur, int cnt) {
-		if (cnt >= answer) {
-			return;
+	private static void Bbutton(int number, int cnt) {
+		number *= 2;
+		String temp = "";
+		while (number > 9) {
+			temp = (number % 10) + temp;
+			number /= 10;
 		}
-		if (cur == G) {
-			answer = Math.min(answer, cnt);
-			return;
+		temp = (number - 1) + temp;
+		number = Integer.parseInt(temp);
+		if (number >= 0 && !check[number]) {
+			queue.offer(new int[] { number, cnt + 1 });
 		}
-		if (cnt == T) {
-			return;
+
+	}
+
+	private static void Abutton(int number, int cnt) {
+		if (!check[number + 1]) {
+			check[number + 1] = true;
+			queue.offer(new int[] { number + 1, cnt + 1 });
 		}
-		if (cur < 99999) {
-			dfs(cur + 1, cnt + 1);
-		}
-		if ((cur * 2) >= 100000) {
-			return;
-		}
-		char[] temp = (cur * 2 + "").toCharArray();
-		if (temp[0] > '0') {
-			temp[0]--;
-		}
-		int number = 0;
-		for (int i = 0; i < temp.length; i++) {
-			number *= 10;
-			number += (temp[i] - '0');
-		}
-		dfs(number, cnt + 1);
 	}
 
 }
