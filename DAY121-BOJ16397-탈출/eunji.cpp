@@ -21,11 +21,12 @@ void BFS(int N, int T, int G) {
 		int num = q.front().first;
 		int turn = q.front().second;
 
+
+		if (turn > T) break;
 		if (num == G) {
 			cout << turn;
 			return;
 		}
-		if (turn > T) break;
 		q.pop();
 		//버튼A
 		if (num < 99999 && visit[num + 1] == false) {
