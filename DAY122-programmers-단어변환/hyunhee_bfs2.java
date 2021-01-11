@@ -1,6 +1,16 @@
+package level3.단어변환;
+
 import java.util.*;
-class Point{
-    String current;
+
+class Solution_BFS2 {
+	
+	public static void main(String[] args) {
+		System.out.println(solution("hit", "cog", new String[] { "hot", "dot", "dog", "lot", "log", "cog" }));
+		System.out.println(solution("hit", "cog", new String[] { "hot", "dot", "dog", "lot", "log" }));
+	}
+	
+	static class Point {
+		String current;
 		boolean[] check;
 		int cnt;
 
@@ -9,17 +19,17 @@ class Point{
 			this.check = check;
 			this.cnt = cnt;
 		}
-}
-class Solution {
-    public int solution(String begin, String target, String[] words) {
-        int answer = 0;
+	}
+
+	public static int solution(String begin, String target, String[] words) {
+		int answer = 0;
 		Queue<Point> queue = new LinkedList<>();
 		boolean[] check = new boolean[words.length];
 		Arrays.fill(check, false);
-		int idx=0;
-		while(!words[idx].equals(target)) {
+		int idx = 0;
+		while (!words[idx].equals(target)) {
 			idx++;
-			if(idx==words.length)
+			if (idx == words.length)
 				return answer;
 		}
 		for (int i = 0; i < words.length; i++) {
@@ -37,7 +47,7 @@ class Solution {
 		while (!queue.isEmpty()) {
 			Point p = queue.poll();
 			String current = p.current;
-			if(current.equals(target)) {
+			if (current.equals(target)) {
 				answer = p.cnt;
 				break;
 			}
@@ -50,7 +60,7 @@ class Solution {
 					}
 					if (count == 1) {
 						p.check[i] = true;
-						queue.offer(new Point(words[i], p.check, p.cnt+1));
+						queue.offer(new Point(words[i], p.check, p.cnt + 1));
 						p.check[i] = false;
 					}
 				}
