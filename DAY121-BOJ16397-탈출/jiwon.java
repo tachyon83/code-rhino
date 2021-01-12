@@ -1,17 +1,16 @@
 
-//Çª´ÂÁß
 import java.io.*;
 import java.util.*;
 
 public class Main{
-	
-	static int N; //LED·Î Ç¥ÇöµÈ ¼ö
-	static int T; //¹öÆ°À» ´©¸¦ ¼ö ÀÖ´Â ÃÖ´ë È½¼ö
-	static int G; //Å»ÃâÀ» À§ÇØ ¶È°°ÀÌ ¸¸µé¾î¾ß ÇÏ´Â ¼ö
-	static int visited[];
+
+	static int N; //LEDë¡œ í‘œí˜„ëœ ìˆ˜
+	static int T; //ë²„íŠ¼ì„ ëˆ„ë¥¼ ìˆ˜ ìžˆëŠ” ìµœëŒ€ íšŸìˆ˜
+	static int G; //íƒˆì¶œì„ ìœ„í•´ ë˜‘ê°™ì´ ë§Œë“¤ì–´ì•¼ í•˜ëŠ” ìˆ˜
+	static int visit[];
 	int count;
-	
-	
+
+
 
 	static class Pair{
 		int number;
@@ -23,103 +22,115 @@ public class Main{
 	}
 
 	public static int Abutton (int number) {
-		int next = number;
-		next++;
-		if(next > 99999) 
+
+		if((number+1) > 99999) 
 			return 0;
 		else 
-			return next;
+			return number+1;
 	}
 
 	public static int Bbutton(int number) {
-		int next = number;
-		//System.out.println(number);
-		next = next * 2;
+		int next = number * 2;
+		
 		if(next > 99999) 
 			return 0;
 		int count = 0;
-		while(next >= 10) {
-			next /= 10;
-			count ++;
+		if(next < 10) {
+			next--;
+		}
+		else {
+			while(next >= 10) {
+				next /= 10;	//twice = 1 1
+				count ++; 	//count = 1;
+			}
+			next = (number*2) - ((1) * (int)Math.pow(10.0, (double)count));
 		}
 		
-		next = number - ((1) * (int)Math.pow(10.0, count));
-	
-		
-		//System.out.println(next);
+
 		return next;
 	}
+	
+	
 
 	public static int bfs() {
-		Queue<Pair> q = new LinkedList();
-		int count = 1;
+		
+		Queue<Pair> q = new LinkedList<>();
 		q.offer(new Pair(N, 0));
-		System.out.println("offer1 : "+q.peek().number+" "+q.peek().time);
-		visited[N]=1;
-		int cur = G;
+		
+		visit[N]=1;
+		
 		while(!q.isEmpty()) {
+			
+			//deep++;
 			Pair now = q.poll();
-			if(q.peek()!=null)	
-				System.out.println("poll : "+q.peek().number+" "+q.peek().time);
-			if(now.number == G) {
-				return now.time;
+			
+			int number = now.number;
+			
+			if(now.time > T) { return -1; }
+			
+			else if(now.number == G) { return now.time; }
+
+			
+			
+			//Abutton
+			int result = Abutton(number);	//number = 1
+			if(result != 0 && visit[result] == 0) {
+				q.offer(new Pair(result,now.time+1));
+				visit[result] = 1;
+
 			}
-			else if(now.time > T) {
-				return 0;
-			
-			}
-			
-			int result = Abutton(now.number);
-			
-			if(result != 0) {
-				q.offer(new Pair(result, count++));
-				System.out.println("offer2 : "+q.peek().number+" "+q.peek().time);
-				visited[cur] = 1;
-			}
-			
+
+
 			if(now.number == 0) {
 				continue;
 			}
+
+
+			//Bbutton
+			result = Bbutton(number);
+			if(result != 0 && visit[result] == 0) {
+				visit[result] = 1;
+				q.offer(new Pair(result,now.time+1));
+			}/*
 			
-			result = Bbutton(cur);
-			if(result != 0) {
-				int next = result;
-				if(visited[next] == 0) {
-					visited[next] = 1;
-					q.offer(new Pair(next, count++));
-					System.out.println("offer3 : "+q.peek().number+" "+q.peek().time);
-				}
-			}
+			for(Pair pp : q) {
+				System.out.print("("+pp.number + " "+pp.time+")");
+			}System.out.println();
+			
+			System.out.println("\n");
+			*/
+		
 			
 		}
-		
+
+
+
+
 		return -1;
-		
+
 	}
 
 	public static void main(String [] args) throws IOException {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		Queue<Pair> q = new LinkedList<Pair>();
 
-		
-
 		String s[] = bf.readLine().split(" ");
 
 		N = Integer.parseInt(s[0]);
 		T = Integer.parseInt(s[1]);
 		G = Integer.parseInt(s[2]);
-		
-		visited = new int[G+1];
+
+		visit = new int[100000];
 
 		int answer = bfs();
-		if(answer == -1) {
+		if(answer == -1 ) {
 			System.out.println("ANG");
 		}else {
 			System.out.println(answer);
 		}
-		
-		
-	
+
+
+
 
 	}
 
