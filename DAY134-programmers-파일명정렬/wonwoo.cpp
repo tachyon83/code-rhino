@@ -30,6 +30,7 @@ vector<string> solution(vector<string> files) {
         int len = files[i].length();
         int numStart = -1, numEnd = -1;
         transform(files[i].begin(), files[i].end(), files[i].begin(), ::toupper);
+
         for (int j = 0; j < len; j++) {
             if (numStart == -1 && files[i][j] >= '0' && files[i][j] <= '9') {
                 numStart = j;
@@ -40,6 +41,7 @@ vector<string> solution(vector<string> files) {
             }
         }
         numEnd = numEnd == -1 ? len : numEnd;
+
         arr[i].subArr[0] = files[i].substr(0, numStart);
         arr[i].subArr[1] = files[i].substr(numStart, numEnd - numStart);
         if (numEnd < len) {
