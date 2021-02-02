@@ -1,25 +1,26 @@
 # Code Rhino (코딩하는 코뿔소)
-## group study repository consisting of 10 people, focus on solving problem every day
+## group study repository consisting of 10 people, focusing on solving problem every day
 
 ### 알고리즘 온라인 스터디 운영 계획
 
 ### * 문제 출제 / 제출 기한
- - 2일 2
- - 출제자 랜덤 선택
+ - 2일 2문제
+ - 출제자 랜덤 선택 (사다리 등으로 결정)
  - 24시까지 출제(깃헙, [백준 그룹](https://www.acmicpc.net/group/8968))
  - 문제 제출 -> 깃헙/단톡에 공지
  - 마감 시간 : 다다음날 24시(48시간)
 
 ### * 문제 출제
- - 백준 기준 실버 ~ 골드
+ - 백준 기준 실버 ~ 골드 (브론즈도 가능)
  - 유형 자율
+ - 가급적 자신이 풀 수 있는(책임질 수 있는) 문제를 출제해 주세요
 
 ### * 한 문제라도 미 제출 시 벌금 2000원
  - 못 푸는 것이 아닌 안 푸는 것에 대한 벌금임.
- - 못 풀 시, 풀려고 시도했던 코드 혹은 필기 인증 부탁드림.
+ - 못 풀었을 시, 풀려고 시도했던 코드 혹은 필기 인증 부탁드림.
  - 카카오뱅크 모임통장 투명하게 운영계획
  - 벌금 매달 말일 1/N 분배
- - 말일 전 중도하차시 분배 불가
+ - 말일 전 중도하차시 본인이 그동안 낸 금액은 돌려받지 못합니다!
 
 ### * PASS 관련 세부사항
  - 매 월 2회 PASS 사용가능
@@ -36,7 +37,7 @@
  - 톡방에서 자유 질의 응답 해주세요
  - 다 푼 후 github을 통해 서로 code review를 통한 발전
  - 코드 리뷰는 'github' 에 댓글로 올려주세요
-   (https://github.com/YounghoonKwon/code-rhino)
- - 'github' 올리는 방법 : 해당 문제 directory 들어가셔서 제목은 성함으로 올려주세요.(younghoon.py)
+   (https://github.com/tachyon83/code-rhino)
+ - 'github' 올리는 방법 : 해당 문제 directory 들어가셔서 제목은 성함으로 올려주세요.(honggildong.py)
  - 불가피한 사정은 톡방에 통보 바람. 스터디분들 의견에 따라 벌금 논의 진행.
  - 실력차이는 천차만별입니다! 너무 부담갖지 마시고, 서로 도움되는 역할 합시다.
