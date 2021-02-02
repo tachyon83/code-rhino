@@ -1,5 +1,5 @@
 # Code Rhino (코테를 뿌수는 코뿔소)
-## group study repository consisting of 10 people, focusing on solving problem every day
+## Group Study repository, focusing on problem solving
 
 ### 알고리즘 온라인 스터디 운영 계획
 
