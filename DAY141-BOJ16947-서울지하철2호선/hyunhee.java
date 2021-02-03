@@ -1,5 +1,3 @@
-package gold3.B16947;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,8 +11,8 @@ public class Main {
 
 	static int N;
 	static List<Integer>[] graph;
-	static boolean[] check; // 순환역인치 check 0 : 방문X 1 : 방문O 2: 재귀로 순환함=순환역
-	static List<Integer> cycle = new ArrayList<>();
+	static boolean[] check;
+	static boolean[] cycle;
 	static Queue<int[]> queue = new LinkedList<>();
 
 	public static void main(String[] args) throws IOException {
@@ -23,6 +21,7 @@ public class Main {
 
 		N = Integer.parseInt(br.readLine());
 		graph = new ArrayList[N];
+		cycle = new boolean[N];
 		for (int n = 0; n < N; n++) {
 			graph[n] = new ArrayList<>();
 		}
@@ -59,7 +58,7 @@ public class Main {
 		queue.offer(new int[] { start, 0 });
 		while (!queue.isEmpty()) {
 			int[] cur = queue.poll();
-			if (cycle.contains(cur[0])) {
+			if (cycle[cur[0]]) {
 				return cur[1];
 			}
 			for (int i = 0; i < graph[cur[0]].size(); i++) {
@@ -74,14 +73,13 @@ public class Main {
 	}
 
 	private static void dfs(int start, int end, int len) {
-		if (cycle.contains(start)) {
+		if (cycle[start]) {
 			return;
 		}
-
 		for (int i = 0; i < graph[end].size(); i++) {
 			int temp = graph[end].get(i);
 			if (temp == start && len > 1) {
-				cycle.add(start);
+				cycle[start] = true;
 				return;
 			}
 			if (!check[temp]) {
