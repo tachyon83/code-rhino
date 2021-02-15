@@ -24,18 +24,16 @@ struct Graph {
 
 struct DisjoinSets
 {
-	int *parent, *rnk;
+	int *parent;
 	int n;
 
 	DisjoinSets(int n)
 	{
 		this->n = n;
 		parent = new int[n + 1];
-		rnk = new int[n + 1];
 
-		for (int i = 0; i <= n; i++)
+		for (int i = 1; i <= n; i++)
 		{
-			rnk[i] = 0;
 			parent[i] = i;
 		}
 	}
@@ -48,15 +46,11 @@ struct DisjoinSets
 
 	void merge(int x, int y)
 	{
-		x = find(x), y = find(y);
+		x = find(x);
+		y = find(y);
 
-		if (rnk[x] > rnk[y])
-			parent[y] = x;
-		else
-			parent[x] = y;
+		parent[x] = y;
 
-		if (rnk[x] == rnk[y])
-			rnk[y]++;
 
 	}
 };
@@ -94,7 +88,7 @@ int main()
 
 	Graph g(V, E);
 
-	for (int i = 0; i < V; i++)
+	for (int i = 0; i < E; i++)
 	{
 		cin >> u >> v >> w;
 		g.addEdge(u, v, w);
