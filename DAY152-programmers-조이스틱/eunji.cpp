@@ -31,11 +31,6 @@ int solution(string name) {
 	int move= (size - start) <= end ? size - start : end;
 	sum += (move <= move2 ? move : move2);
 
-	return sum;
-
-	//사람들이 올려놓은 테케 11번 예제보고 코드 바꿧는데... 실행결과 테스트11은 통과안하네요...
-	//음...
-
 }
 
 int minUpdown(char k) {
