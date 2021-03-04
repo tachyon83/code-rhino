@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-	static int n;
+	static int n, m;
 	static int paper[][];
 	static boolean visit[][];
 	
@@ -18,9 +18,10 @@ public class Main {
 			nx = x + dx[i];
 			ny = y + dy[i];
 			
-			if(0<=nx && nx<n && 0<=ny && ny < n) {
+			if(0<=nx && nx<m && 0<=ny && ny < n) {
 				if(!visit[nx][ny] && paper[nx][ny]==1) {
 					a++;
+					//System.out.println("nx = "+ nx+", ny = "+ny);
 					visit[nx][ny]= true;
 					dfs(nx,ny);
 				}
@@ -37,42 +38,42 @@ public class Main {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		StringBuilder sb = new StringBuilder();
 
+		String s[] = bf.readLine().split(" ");
+		n = Integer.parseInt(s[0]);
+		m = Integer.parseInt(s[1]);
 		
-		n = Integer.parseInt(bf.readLine());
-		
-		
-		paper  = new int[n][n];
-		visit = new boolean[n][n];
-		int complex[] = new int[n*n];
+		paper  = new int[m][n];
+		visit = new boolean[m][n];
 		int count=0;
 		
 		for(int i=0;i<n;i++) {
-			String s2[] = bf.readLine().split("");
-			for(int j=0;j<n;j++) {
-				paper[i][j] = Integer.parseInt(s2[j]);
+			String s2[] = bf.readLine().split(" ");
+			for(int j=0;j<m;j++) {
+				paper[j][i] = Integer.parseInt(s2[j]);
 			}
 		}
-		int number = 0;
-		for(int i=0;i<n;i++) {
+		
+		for(int i=0;i<m;i++) {
 			for(int j=0;j<n;j++) {
 				if(paper[i][j]==1 && !visit[i][j]) {
 					visit[i][j] = true;
 					a=1;
 					//System.out.println("visit["+i+"]["+j+"]");
-					complex[number++] = dfs(i,j);
+					
+					int area = dfs(i,j);
+					if(max < area) {
+						max = area;
+					}
 					count++;
 				}
 			}
 		}
 		
 		System.out.println(count);
-		Arrays.parallelSort(complex);
-		for(int i : complex) {
-			if(i==0) {
-				continue;
-			}
-			System.out.println(i);
-		}
+		
+			System.out.println(max);
+		
+		
 		
 
 	}
