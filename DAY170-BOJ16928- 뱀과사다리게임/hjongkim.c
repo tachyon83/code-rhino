@@ -40,7 +40,7 @@ void jump(int location, int count) {
     for (i = 0; i < N; i++) {
         if (ladder[i].x == location) {
             if (visited[ladder[i].y])
-                continue;
+                return;
 
             visited[ladder[i].y] = 1;
             push(ladder[i].y, count + 1);
@@ -51,7 +51,7 @@ void jump(int location, int count) {
     for (i = 0; i < M; i++) {
         if (snake[i].x == location) {
             if (visited[snake[i].y])
-                continue;
+                return;
 
             visited[snake[i].y] = 1;
             push(snake[i].y, count + 1);
@@ -92,8 +92,6 @@ int bfs() {
 int main() {
     int i;
     struct data t;
-
-    freopen("day170.txt", "r", stdin);
 
     scanf("%d %d ", &N, &M);
 
