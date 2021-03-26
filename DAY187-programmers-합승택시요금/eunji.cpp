@@ -4,7 +4,7 @@
 #include<queue>
 #define INF 987654321;
 using namespace std;
-int dist[3][20];
+int dist[3][201];
 vector<pair<int, int>> node[201];
 void doDijkstra();
 
