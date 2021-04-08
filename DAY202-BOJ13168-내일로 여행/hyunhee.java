@@ -59,7 +59,7 @@ public class Main {
 			if (type == 0) {
 				arr[e][s] = arr[s][e] = 0;
 			} else if (type == 1) {
-				arr[e][s] = arr[s][e] = Math.min(arr[s][e], (double) (cost / 2));
+				arr[e][s] = arr[s][e] = Math.min(arr[s][e], cost * 0.5);
 			} else {
 				arr[e][s] = arr[s][e] = Math.min(arr[s][e], cost);
 			}
@@ -76,9 +76,9 @@ public class Main {
 		}
 
 		if (naeil < normal) {
-			System.out.println("YES");
+			System.out.println("Yes");
 		} else {
-			System.out.println("NO");
+			System.out.println("No");
 		}
 
 	}
