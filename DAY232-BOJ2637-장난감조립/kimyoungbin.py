@@ -17,7 +17,7 @@ q = deque()
 q.append(n)
 cnt[n] = 1
 ans = []
-while len(q) is not 0:
+while len(q) != 0:
     cur = q.popleft()
     if len(graph[cur]) == 0:
         ans.append(cur)
@@ -26,7 +26,7 @@ while len(q) is not 0:
         cost = g[1]
         cnt[next] += cnt[cur] * cost
         indegree[next] -= 1
-        if indegree[next] is 0:
+        if indegree[next] == 0:
             q.append(next)
 ans.sort()
 for a in ans:
