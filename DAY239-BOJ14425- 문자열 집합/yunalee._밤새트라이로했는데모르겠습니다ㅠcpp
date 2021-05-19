@@ -1,0 +1,74 @@
+#include <iostream>
+
+using namespace std;
+
+struct Trie {
+	bool finish;
+	Trie* next[26];
+
+	Trie() : finish(false) {
+		memset(next, 0, sizeof(next));
+	}
+
+	~Trie() {
+		for (int i = 0; i < 26; i++) {
+			if (next[i]) {
+				delete next[i];
+			}
+		}
+	}
+
+	void insert(string key, int idx) {
+		if (idx >= key.size()) {
+			finish = true;
+		}
+		else {
+			int curr = key[idx] - 'a';
+			if (next[curr] == NULL) {
+				next[curr] = new Trie();
+			}
+			next[curr]->insert(key, idx + 1);
+		}
+	}
+
+	bool find(string key, int idx) {
+		if (idx >= key.size()) {
+			return false;
+		}
+		if (finish) {
+			return true;
+		}
+		int curr = key[idx] - 'a';
+		if (next[curr] == NULL) {
+			return false;
+		}
+		return next[curr]->find(key, idx + 1);
+	}
+};
+
+int main() {
+	ios::sync_with_stdio(false);
+	cin.tie(nullptr);
+
+	Trie trie;
+	int N, M;
+	cin >> N >> M;
+
+	for (int i = 0; i < N; i++) {
+		string str;
+		cin >> str;
+		trie.insert(str, 0);
+	}
+
+	int result = 0;
+	for (int i = 0; i < M; i++) {
+		string str;
+		cin >> str;
+		
+		if (trie.find(str, 0)) {
+			result++;
+		}
+	}
+
+	cout << result << '\n';
+}
