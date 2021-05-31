@@ -4,9 +4,10 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
+//기존 코드 300ms(단어 그대로 ) -> 168ms(단어들을 bit로 바꿔서 배열에 넣기!)
 public class Main {
 	static int N, K, max = 0, ch = 0;
-	static String[] word;
+	static int[] word;
 
 	public static void main(String[] args) throws Exception{
 		// TODO Auto-generated method stub
@@ -14,7 +15,7 @@ public class Main {
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		N = Integer.parseInt(st.nextToken());
 		K = Integer.parseInt(st.nextToken());
-		word = new String[N];
+		word = new int[N];
 		
 //		남극 단어의 글자수의 최소도 못배웠을 때
 		if (K < 5) 
@@ -26,8 +27,10 @@ public class Main {
 			for(int i = 0; i < N; i++) {
 				String s = br.readLine();
 //				필수 글자들 제외한 나머지
-//				word[i] = s.substring(4, s.length()-4);
-				word[i] = s.replaceAll("[antic]", "");
+				word[i] = toBit(s.substring(4, s.length()-4));
+//				word[i] = toBit(s.replaceAll("[antic]", ""));
+				System.out.println(Integer.bitCount(~word[i]));
+				
 			}
 //			ch에 알파벳들의 사용유무를 비트로 저장.
 			ch |= 1<<('a'-'a');
@@ -51,13 +54,11 @@ public class Main {
 //			배운 단어 나올 때마다 1씩 깎기
 			int count = N;
 			for(int i = 0; i < N; i++) {
-				String s = word[i];
-				for(int j = 0; j < s.length(); j++) {
-//					가르친 글자가 하나라도 없을 때 - 백트래킹
-					if(!learnedChar(s.charAt(j)-'a', ch)) {
-						count--;
-						break;
-					}
+//				가르친 글자가 하나라도 없을 때 - 백트래킹
+//				포함되었을 때 == 합집합이 ch와 같을때!
+				if((word[i] | ch) != ch) {
+					count--;
+					
 				}
 			}
 			max = Math.max(max, count);
@@ -66,10 +67,11 @@ public class Main {
 //			모든 알파벳 갯수만큼
 			for(int i = n; i < 26; i++) {
 //				a, b, c, ...가 배운 글자에 들어있지 않다면
-				if(!learnedChar(i, ch)) {
+//				같은 게 있다면 무조건 1이상의 값이 나온다.
+				if((ch & (1<<i)) == 0) {
 //					해당 글자를 배운글자에 넣어줘라
 					ch |= (1<<i);
-//					해당 글자를 배웠다는 가정하에 조합 돌리기! => 해당글자를 배운글자에서 뺄 필요 X
+//					해당 글자를 배웠다는 가정하에 조합 돌리기!
 					comb(i+1, r+1, ch);
 //					해당 글자를 배운 글자에서 빼줘라
 					ch &= ~(1<<i);
@@ -77,13 +79,14 @@ public class Main {
 			}
 		}
 	}
-	
-//	그 글자를 가르쳤는지 확인
-	static boolean learnedChar(int c, int ch) {
-//		같은 게 있다면 무조건 1이상의 값이 나온다.
-		if((ch & (1<<c)) > 0)
-			return true;
-		return false;
+//	단어를 비트마스크로 바꾸기
+	static int toBit(String str) {
+		int temp = 0;
+		for(int i = 0; i < str.length(); i++) {
+			Character c = str.charAt(i);
+			temp |= 1<<(c-'a');
+		}
+		return temp;
 	}
 
 }
