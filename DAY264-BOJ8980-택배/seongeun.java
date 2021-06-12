@@ -1,5 +1,4 @@
 /**
- * 미완성
  * 최대한 많은 마을을 거쳐가면서 상자를 내려야 한다.
  * 처음에 출발지에서 많은 상자를 가지고 가는 것을 생각했는데
  * 이렇게 간단한 문제는 아닐거라고 생각했고 반례를 찾았다.
@@ -34,6 +33,8 @@ public class 택배_8980 {
             }
         });
 
+        int result = 0;
+
         for(int i = 0; i < list.size(); i++){
             int[] send = list.get(i);
             int start = send[0];
@@ -41,7 +42,20 @@ public class 택배_8980 {
             int weight = send[2];
 
             //매 도착 마을에 내릴 수 있는 최대 무게를 정한다.
-            
+            //더한 값이 최대 용량 보다 작으면 삽입
+            int min = weight;
+            for(int j = start; j < end; j++){
+                //더할 수 있는 최소 값 찾기
+                if(box[j] + weight > capacity)
+                    min = Math.min(capacity - box[j],min);
+            }
+
+            result += min;
+
+            for(int j = start; j < end; j++)
+                box[j] += min;
         }
+
+        System.out.println(result);
     }
 }
