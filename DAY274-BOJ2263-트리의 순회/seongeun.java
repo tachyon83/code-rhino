@@ -31,7 +31,7 @@ public class 트리의순회_2263 {
         sb.append(root + " ");
 
         //root의 index를 구하자.
-        int rootIdx = inOrder[root];
+        int rootIdx = inOrderRootIdx[root];
 
         //left의 개수를 count
         int leftCount = rootIdx - inOrderLeft;
