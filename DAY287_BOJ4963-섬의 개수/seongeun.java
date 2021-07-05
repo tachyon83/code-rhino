@@ -1,22 +1,3 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.StringTokenizer;
-
-/*
-10
-1 1 1 0 0 0 0 1 1 1
-1 1 1 1 0 0 0 0 1 1
-1 0 1 1 0 0 0 0 1 1
-0 0 1 1 1 0 0 0 0 1
-0 0 0 1 0 0 0 0 0 1
-0 0 0 0 0 0 0 0 0 1
-0 0 0 0 0 0 0 0 0 0
-0 0 0 0 1 1 0 0 0 0
-0 0 0 0 1 1 1 0 0 0
-0 0 0 0 0 0 0 0 0 0
- */
 public class Main {
 
     private static int n;
