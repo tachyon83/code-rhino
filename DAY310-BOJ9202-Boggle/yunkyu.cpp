@@ -1,7 +1,3 @@
-// Boggle
-// https://www.acmicpc.net/problem/9202
-// 20%에서 틀렸다고 나옴
-
 #include <iostream>
 #include <string>
 #include <vector>
@@ -38,7 +34,7 @@ struct Trie {
 		}
 		else {
 			int curr = *key - 'A';
-			if (!next[curr])
+			if (next[curr] == NULL)
 				next[curr] = new Trie();
 			next[curr]->insert(key + 1);
 		}
@@ -50,7 +46,7 @@ void search(Trie* t, int y, int x, string s) {
 		return;
 	}
 	int ind = board[y][x] - 'A'; // 알파벳의 인덱스
-	if (!t->next[ind]) { // 단어사전에 존재하지 않음
+	if ((t->next[ind]) == NULL) { // 단어사전에 존재하지 않음
 		return;
 	}
 
@@ -112,7 +108,7 @@ int main() {
 			total += score[l];
 		}
 
-		cout << total << ' ' << res << ' ' << st.size();
+		cout << total << " " << res << " " << st.size() << "\n";
 		// 초기화
 		total = 0;
 		maxL = 0;
