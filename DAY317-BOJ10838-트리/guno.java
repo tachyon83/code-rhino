@@ -2,60 +2,89 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    static List<List<Edge>> graph;
-    static boolean[] visited;
-    static int ans;
+    static int[] parents;
+    static int[] colors;
+    static int[] marked;
+    static int k=0;
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringBuilder sb=new StringBuilder();
         StringTokenizer st;
-
-        st=new StringTokenizer(br.readLine());
+        st = new StringTokenizer(br.readLine());
         int n=Integer.parseInt(st.nextToken()),m=Integer.parseInt(st.nextToken());
-        graph=new ArrayList<>();
-        for (int i = 0; i < n+1; i++) {
-            graph.add(new ArrayList<>());
-        }
-        for (int i = 0; i < n-1; i++) {
-            st=new StringTokenizer(br.readLine());
-            int a=Integer.parseInt(st.nextToken()),b=Integer.parseInt(st.nextToken()),c=Integer.parseInt(st.nextToken());
-            graph.get(a).add(new Edge(b,c));
-            graph.get(b).add(new Edge(a,c));
-        }
+        parents=new int[n];
+        colors=new int[n];
+        marked=new int[n];
+
         for (int i = 0; i < m; i++) {
-            st=new StringTokenizer(br.readLine());
-            int a=Integer.parseInt(st.nextToken()),b=Integer.parseInt(st.nextToken());
-            visited=new boolean[n+1];
-            search(a,b,0);
-            sb.append(ans).append("\n");
-        }
 
+            st = new StringTokenizer(br.readLine());
+            int r,a,b,c;
+            r=Integer.parseInt(st.nextToken());
+            a=Integer.parseInt(st.nextToken());
+            b=Integer.parseInt(st.nextToken());
 
-        bw.write(sb.toString());bw.flush();bw.close();br.close();
-    }
-    static void search(int start,int end,int sum){
-        if(start==end){
-            ans=sum;
-            return;
-        }
-        visited[start]=true;
-
-        for(Edge e:graph.get(start)){
-            if(!visited[e.to]){
-                search(e.to,end,sum+e.w);
+            switch (r){
+                case 1:
+                    c=Integer.parseInt(st.nextToken());
+                    paint(a,b,c);
+                    break;
+                case 2:
+                    move(a,b);
+                    break;
+                case 3:
+                    sb.append(count(a,b)).append("\n");
             }
         }
 
-        visited[start]=false;
-
+        bw.write(sb.toString());bw.flush();bw.close();br.close();
     }
-    static class Edge{
-        int to;
-        int w;
-        Edge(int to,int w){
-            this.to=to;
-            this.w=w;
+    static int getLca(int a,int b){
+        k++;
+        while (true){
+            if(marked[a]==k && a!=0)
+                return a;
+            if(marked[b]==k && b!=0)
+                return b;
+            marked[a]=k;
+            marked[b]=k;
+            if(a==b)
+                return a;
+            a=parents[a];
+            b=parents[b];
         }
     }
+    static void paint(int a,int b,int c){
+        int lca=getLca(a,b);
+        while (a!=lca){
+            colors[a]=c;
+            a=parents[a];
+        }
+        while (b!=lca){
+            colors[b]=c;
+            b=parents[b];
+        }
+
+    }
+
+    static void move(int a,int b){
+        parents[a]=b;
+    }
+
+    static int count(int a,int b){
+        Set<Integer> set=new TreeSet<>();
+        int lca=getLca(a,b);
+        while (a!=lca){
+            set.add(colors[a]);
+            a=parents[a];
+        }
+        while (b!=lca){
+            set.add(colors[b]);
+            b=parents[b];
+        }
+
+        return set.size();
+    }
+
 }
