@@ -31,28 +31,21 @@ public class Main {
     }
 
     static int dfs(int node,int parent,boolean isChecked){
-        int ret=0;
-
+        int ret=0,temp1=0,temp2=0;
+        
+        if(!isChecked)
+            temp2=peoples[node];
         for (int next:graph.get(node)){
-            int temp;
             if(next==parent){
-                if(isChecked)
-                    continue;
-                else{
-                    ret+=peoples[node];
-                }
-
-
+                continue;
             }
+            temp1+=dfs(next,node,false);
+            if(!isChecked)
+                temp2+=dfs(next,node,true);
 
-            if(isChecked){
-                temp=dfs(next,node,false);
-            }else {
-                temp=Math.max(dfs(next,node,true)+peoples[node],dfs(next,node,false));
-            }
-            ret+=Math.max(ret,temp);
         }
-        return ret;
+
+        return Math.max(temp1,temp2);
     }
 
 }
