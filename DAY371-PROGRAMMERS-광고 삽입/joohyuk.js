@@ -36,7 +36,7 @@ function solution(play_time, adv_time, logs) {
     
     let recordsIdx=0,acc=0
     info.forEach((e,i)=>{
-        if(recordsIdx<records.length&&i===records[recordsIdx][0]){
+        while(recordsIdx<records.length&&i===records[recordsIdx][0]){
             if(records[recordsIdx][1])acc--
             else acc++
             recordsIdx++
@@ -56,5 +56,5 @@ function solution(play_time, adv_time, logs) {
         }
     })
     
-    return convert2(mxIdx-advTime+1)
+    return convert2(mxIdx-advTime+1>0?mxIdx-advTime+1:0)
 }
