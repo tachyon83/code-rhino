@@ -13,16 +13,16 @@ mid = (lo + hi) // 2
 chk = False
 
 while lo <= hi:
-    # 루프 내내 변화하는 체력과 공격력을 deepcopy로 완전히 복사
+    # 루프 내내 변화하는 용사의 체력과 공격력을 deepcopy로 완전히 복사
     hp = deepcopy(mid)
     atk = deepcopy(a)
     chk = False
     for i in range(n):
         # 쿼리 첫째 항이 1일 때, 몬스터 출현
         if li[i][0] == 1:
-            # 몬스터의 체력은 상관없고, 몬스터와 전투 시 깎이는 체력만 중요함
+            # 몬스터의 체력은 상관없고, 몬스터와 전투 시 깎이는 용사의 체력만 중요함
             hp -= li[i][1] * ceil((li[i][2] / atk) - 1)
-            # 전투 후 제력이 마이너스일 시 (죽었을 시) 루프 탈출
+            # 전투 후 용사 제력이 마이너스일 시 (죽었을 시) 루프 탈출
             if hp <= 0:
                 chk = True
                 break
