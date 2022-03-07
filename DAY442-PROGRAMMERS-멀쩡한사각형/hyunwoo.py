@@ -5,7 +5,7 @@ def gcd(a, b):
     return a
 
 def solution(w, h):
-    # 주어진 가로 격자와 세로 격자의 최소공배수
+    # 주어진 가로 격자와 세로 격자의 최대공약수 = 대각선이 지나가는 최소단위 격자 수
     div = gcd(w, h)
     # 전체 타일 수
     total_tile = w * h
