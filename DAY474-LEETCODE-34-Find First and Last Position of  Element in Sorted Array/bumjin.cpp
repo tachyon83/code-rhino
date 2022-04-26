@@ -1,30 +1,44 @@
+#include <bits/stdc++.h>
 using namespace std;
- 
-// Function for finding first and last occurrence
-// of an elements
-void findFirstAndLast(int arr[], int n, int x)
+
+
+int first(int arr[], int low, int high, int x, int n)
 {
-    int first = -1, last = -1;
-    for (int i = 0; i < n; i++) {
-        if (x != arr[i])
-            continue;
-        if (first == -1)
-            first = i;
-        last = i;
+    if (high >= low) {
+        int mid = low + (high - low) / 2;
+        if ((mid == 0 || x > arr[mid - 1]) && arr[mid] == x)
+            return mid;
+        else if (x > arr[mid])
+            return first(arr, (mid + 1), high, x, n);
+        else
+            return first(arr, low, (mid - 1), x, n);
     }
-    if (first != -1)
-        cout << "First Occurrence = " << first
-             << "\nLast Occurrence = " << last;
-    else
-        cout << "Not Found";
+    return -1;
 }
- 
-// Driver code
+
+int last(int arr[], int low, int high, int x, int n)
+{
+    if (high >= low) {
+        int mid = low + (high - low) / 2;
+        if ((mid == n - 1 || x < arr[mid + 1]) && arr[mid] == x)
+            return mid;
+        else if (x < arr[mid])
+            return last(arr, low, (mid - 1), x, n);
+        else
+            return last(arr, (mid + 1), high, x, n);
+    }
+    return -1;
+}
 int main()
 {
     int arr[] = { 1, 2, 2, 2, 2, 3, 4, 7, 8, 8 };
     int n = sizeof(arr) / sizeof(int);
+ 
     int x = 8;
-    findFirstAndLast(arr, n, x);
+    printf("First Occurrence = %d\t",
+           first(arr, 0, n - 1, x, n));
+    printf("\nLast Occurrence = %d\n",
+           last(arr, 0, n - 1, x, n));
+ 
     return 0;
 }
