@@ -6,16 +6,16 @@ using namespace std;
 typedef long long ll;
 
 int N;
-ll arr[101], cache[21][101];
+arr[101], cache[21][101];
 
 // dp(val, idx): 현재까지의 계산값이 val이고 idx번째 수~마지막 수까지 고려할 때 만들 수 있는 등식의 수
-ll dp(ll val, int idx) {
+dp(ll val, int idx) {
     if (idx == N-1) {
         if (val == arr[idx]) return 1;
         else return 0;
     }
     
-    ll& ret = cache[val][idx];
+    & ret = cache[val][idx];
     if (ret != -1) return ret;
     
     ret = 0;
